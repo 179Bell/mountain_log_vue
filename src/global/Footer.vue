@@ -1,5 +1,7 @@
 <template>
-  
+  <div>
+    フッター
+  </div>
 </template>
 
 <script>
