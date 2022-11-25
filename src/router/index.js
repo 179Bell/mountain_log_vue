@@ -14,7 +14,7 @@ const routes = [
     component: Index
   },
   {
-    path: '/edit/id',
+    path: '/edit/:id',
     name: 'Edit',
     component: Edit
   },
