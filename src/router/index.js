@@ -10,23 +10,29 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'index',
+    name: 'Index',
     component: Index
   },
   {
     path: '/edit/id',
-    name: 'edit',
+    name: 'Edit',
     component: Edit
   },
   {
     path: '/search',
-    name: 'search',
+    name: 'Search',
     component: Search 
+  },
+  {
+    path: '*',
+    redirect: '/'
   }
 ]
 
 const router = new VueRouter({
-  routes
+  mode: 'hitstory',
+  routes,
+  base: process.env.BASE_URL
 })
 
 export default router
