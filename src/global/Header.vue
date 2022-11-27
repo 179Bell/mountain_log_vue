@@ -4,18 +4,18 @@
             app
             color="green"
             dark>
-            <v-app-bar-title>MOUNTAIN LOG</v-app-bar-title>
+            <v-toolbar-title
+                @click="$router.push('/')"
+                style="cursor:pointer"
+            >MOUNTAIN LOG</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn
-                color="error">削除する</v-btn>
+                color="error"
+                style="cursor:pointer">削除する</v-btn>
+            <v-btn 
+                color="primary"
+                @click="$router.push('/search')"
+                style="cursor:pointer">検索する</v-btn>
         </v-app-bar>
     </div>
 </template>
-<script>
-export default {
-    
-}
-</script>
-<style lang="">
-    
-</style>
