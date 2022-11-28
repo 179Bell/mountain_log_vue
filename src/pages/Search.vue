@@ -42,18 +42,19 @@ export default {
         async search(keyword){
             this.searchResults = []
             const baseUrl = "https://api.yamareco.com/api/v1/searchPoi"
+            const form = new FormData()
+            form.append('name', keyword)
+            form.append('type_id', 1)
+            form.append('page', 1)
+            
             const params = {
                 method: 'POST',
-                mode: 'cors',
-                body: JSON.stringify({
-                    name: keyword,
-                    type_id: 1,
-                    page: 1
-                })
+                body: form
             }
 
             const response = await fetch(baseUrl, params)
-            console.log(response)
+            const json = response.json()
+            console.log(json)
         }
     }
 }
