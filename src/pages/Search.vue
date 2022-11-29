@@ -24,7 +24,7 @@
         </v-row>
         <v-row>
             <v-col cols="12" md="6"
-                v-for="poi in searchResults" :key="poi.index">
+                v-for="(poi, index) in searchResults" :key="index">
                 <v-card class="mx-auto">
                     <v-row>
                         <v-col cols="4">
@@ -34,18 +34,19 @@
                             <v-card-title>{{ poi.name }}</v-card-title>
                             <v-card-subtitle>標高{{ poi.elevation }}m</v-card-subtitle>
                             <v-spacer></v-spacer>
-                            <v-card-action>
+                            <v-card-actions>
                                 <v-btn
                                     class="mx-2"
                                     fab
                                     dark
                                     color="indigo"
+                                    @click="addLog(index)"
                                 >
                                 <v-icon dark>
                                     mdi-plus
                                 </v-icon>
                             </v-btn>
-                            </v-card-action>
+                            </v-card-actions>
                         </v-col>
                     </v-row>
                 </v-card>
@@ -63,6 +64,9 @@ export default {
         }
     },
     methods:{
+        addLog(index){
+            this.$emit('add-log', this.searchResults[index])
+        },
         async search(keyword){
             this.searchResults = []
             const baseUrl = "https://api.yamareco.com/api/v1/searchPoi"
@@ -83,9 +87,12 @@ export default {
                 let elevation = poi.elevation
                 let img = poi.photo_url
                 this.searchResults.push({
-                    name, elevation, img
+                    name : name,
+                    elevation : elevation,
+                    img : img
                 })
             }
+            console.log(this.searchResults)
         }
     }
 }
