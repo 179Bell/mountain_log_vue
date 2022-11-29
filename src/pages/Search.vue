@@ -23,8 +23,33 @@
             </v-col>
         </v-row>
         <v-row>
-            <v-col>
-
+            <v-col cols="12" md="6"
+                v-for="(poi, index) in searchResults" :key="index">
+                <v-card class="mx-auto">
+                    <v-row>
+                        <v-col cols="4">
+                            <v-img :src="poi.img"></v-img>
+                        </v-col>
+                        <v-col>
+                            <v-card-title>{{ poi.name }}</v-card-title>
+                            <v-card-subtitle>標高{{ poi.elevation }}m</v-card-subtitle>
+                            <v-spacer></v-spacer>
+                            <v-card-actions>
+                                <v-btn
+                                    class="mx-2"
+                                    fab
+                                    dark
+                                    color="indigo"
+                                    @click="addLog(index)"
+                                >
+                                <v-icon dark>
+                                    mdi-plus
+                                </v-icon>
+                            </v-btn>
+                            </v-card-actions>
+                        </v-col>
+                    </v-row>
+                </v-card>
             </v-col>
         </v-row>
     </div>
@@ -39,6 +64,9 @@ export default {
         }
     },
     methods:{
+        addLog(index){
+            this.$emit('add-log', this.searchResults[index])
+        },
         async search(keyword){
             this.searchResults = []
             const baseUrl = "https://api.yamareco.com/api/v1/searchPoi"
@@ -53,8 +81,18 @@ export default {
             }
 
             const response = await fetch(baseUrl, params)
-            const json = response.json()
-            console.log(json)
+            .then(response => response.json())
+            for(let poi of response.poilist){
+                let name = poi.name
+                let elevation = poi.elevation
+                let img = poi.photo_url
+                this.searchResults.push({
+                    name : name,
+                    elevation : elevation,
+                    img : img
+                })
+            }
+            console.log(this.searchResults)
         }
     }
 }
