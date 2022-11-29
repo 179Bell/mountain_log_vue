@@ -30,6 +30,15 @@ export default {
       newLog: null
     }
   },
+  mounted(){
+    if (localStorage.getItem(STORAGE_KEY)) {
+      try {
+        this.logs = JSON.parse(localStorage.getItem(STORAGE_KEY))
+      } catch(e) {
+        localStorage.removeItem(STORAGE_KEY)
+      }
+    }
+  },
   methods: {
     addLog(e) {
       this.logs.push({
