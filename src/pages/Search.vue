@@ -23,7 +23,7 @@
             </v-col>
         </v-row>
         <v-row>
-            <v-col cols="12"
+            <v-col cols="12" md="6"
                 v-for="poi in searchResults" :key="poi.index">
                 <v-card class="mx-auto">
                     <v-row>
@@ -32,7 +32,7 @@
                         </v-col>
                         <v-col>
                             <v-card-title>{{ poi.name }}</v-card-title>
-                            <v-card-subtitle>{{ poi.elevation }}</v-card-subtitle>
+                            <v-card-subtitle>標高{{ poi.elevation }}m</v-card-subtitle>
                             <v-spacer></v-spacer>
                             <v-card-action>
                                 <v-btn
