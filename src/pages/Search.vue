@@ -23,8 +23,32 @@
             </v-col>
         </v-row>
         <v-row>
-            <v-col>
-
+            <v-col cols="12"
+                v-for="poi in searchResults" :key="poi.index">
+                <v-card class="mx-auto">
+                    <v-row>
+                        <v-col cols="4">
+                            <v-img :src="poi.img"></v-img>
+                        </v-col>
+                        <v-col>
+                            <v-card-title>{{ poi.name }}</v-card-title>
+                            <v-card-subtitle>{{ poi.elevation }}</v-card-subtitle>
+                            <v-spacer></v-spacer>
+                            <v-card-action>
+                                <v-btn
+                                    class="mx-2"
+                                    fab
+                                    dark
+                                    color="indigo"
+                                >
+                                <v-icon dark>
+                                    mdi-plus
+                                </v-icon>
+                            </v-btn>
+                            </v-card-action>
+                        </v-col>
+                    </v-row>
+                </v-card>
             </v-col>
         </v-row>
     </div>
@@ -53,8 +77,15 @@ export default {
             }
 
             const response = await fetch(baseUrl, params)
-            const json = response.json()
-            console.log(json)
+            .then(response => response.json())
+            for(let poi of response.poilist){
+                let name = poi.name
+                let elevation = poi.elevation
+                let img = poi.photo_url
+                this.searchResults.push({
+                    name, elevation, img
+                })
+            }
         }
     }
 }
