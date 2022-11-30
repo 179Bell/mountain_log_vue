@@ -10,12 +10,15 @@
                         <v-col cols="8">
                             <v-card-title>{{ log.name }}</v-card-title>
                             <v-spacer></v-spacer>
-                            <v-btn
-                                color="indigo"
-                                fad
-                                small
-                                dark>
-                            <v-icon>mdi-pencil</v-icon></v-btn>
+                            <v-card-actions>
+                                <v-btn
+                                    :to = "{name: 'Edit', params: {id: log.id}}"
+                                    color="indigo"
+                                    fad
+                                    small
+                                    dark>
+                                <v-icon>mdi-pencil</v-icon></v-btn>
+                            </v-card-actions>
                         </v-col>
                     </v-row>
                 </v-card>

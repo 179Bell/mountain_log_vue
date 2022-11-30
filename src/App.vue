@@ -48,10 +48,14 @@ export default {
       });
       console.log(this.logs)
       this.saveLog();
+      this.goToEditPage(this.logs.slice(-1)[0].id)
     },
     saveLog() {
       const parsed = JSON.stringify(this.logs);
       localStorage.setItem(STORAGE_KEY, parsed)
+    },
+    goToEditPage(id) {
+      this.$router.push(`/edit/${id}`)
     }
   }
 };
